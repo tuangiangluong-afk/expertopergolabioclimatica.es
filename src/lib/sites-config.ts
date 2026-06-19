@@ -1,7 +1,3 @@
-/**
- * Site Configuration for Expert Béton Décoratif
- */
-
 export interface SiteConfig {
     slug: string;
     domain: string;
@@ -38,61 +34,55 @@ export interface SiteConfig {
 }
 
 const TEMPLATE_CERTIFICATIONS = [
-    "Artisans Qualifiés RGE",
-    "Garantie Décennale",
-    "Matériaux Certifiés NF"
+    "Diseño a medida",
+    "Aluminio alta calidad",
+    "Garantía de instalación"
 ];
 const TEMPLATE_AIDES = [
-    "Devis gratuits et sans engagement",
-    "Étude de faisabilité offerte",
-    "Assurance décennale béton incluse"
+    "Presupuesto sin compromiso",
+    "Proyecto llave en mano"
 ];
 const TEMPLATE_FEATURES = [
-    "Devis sous 24h/48h",
-    "Grand choix de finitions (désactivé, imprimé, lissé)",
-    "Haute résistance & durabilité",
-    "Accès camion toupie étudié",
-    "Esthétique moderne & personnalisée"
+    "Lamas motorizadas",
+    "Luces LED integradas",
+    "Cerramientos opcionales"
 ];
 
 const _hubConfig: SiteConfig = {
     slug: "home",
-    domain: 'expertopergolabioclimatica.es',
-    city: "France",
+    domain: "expertopergolabioclimatica.es",
+    city: "España",
     postalCode: "",
     department: "",
     region: "National",
-    name: 'Experto Pérgola Bioclimática',
-    phoneNumber: "01 84 80 00 00",
-    email: 'contacto@expertopergolabioclimatica.es',
+    name: "Experto Pérgola Bioclimática",
+    phoneNumber: "910 00 00 00",
+    email: "contacto@expertopergolabioclimatica.es",
     targetType: "CONCRETE",
     priceRange: 'STANDARD',
     theme: 'premium',
-    heroImage: "/images/generated/concrete-hero.webp",
-    description: "Le réseau n°1 des poseurs de béton décoratif et désactivé en France. Devis gratuit sous 24h.",
+    heroImage: "/images/generated/pergola-hero.png",
+    description: "Encuentra instaladores autorizados de pérgolas bioclimáticas en España. Solicita tu estudio gratuito.",
     meta: {
-        title: "Expert Béton Décoratif | Béton Désactivé & Imprimé FR",
-        description: "Installation de béton désactivé, imprimé, balayé pour terrasses et allées. Devis gratuit."
+        title: "Experto Pérgola Bioclimática | Presupuestos & Instalación",
+        description: "Encuentra instaladores autorizados de pérgolas bioclimáticas en España. Solicita tu estudio gratuito."
     },
     certifications: TEMPLATE_CERTIFICATIONS,
     aidesDisponibles: TEMPLATE_AIDES,
     features: TEMPLATE_FEATURES,
     localKeywords: [
-    "pose beton desactive",
-    "beton imprime prix m2",
-    "pose dalle beton terrasse",
-    "artisan beton decoratif",
-    "beton lisse garage"
+    "pergola bioclimatica",
+    "pergola aluminio"
 ],
     quartiers: [],
     coproprietes: [],
     centresCommerciaux: [],
-    coordinates: { lat: 48.856, lng: 2.352 }
+    coordinates: { lat: 46.22, lng: 2.21 }
 };
 
 export const SITES: Record<string, SiteConfig> = {
-    "expertbetondecoratif.com": _hubConfig,
-    "www.expertbetondecoratif.com": _hubConfig,
+    "expertopergolabioclimatica.es": _hubConfig,
+    "www.expertopergolabioclimatica.es": _hubConfig,
     "home": _hubConfig
 };
 

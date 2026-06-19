@@ -18,7 +18,7 @@ export default function Header({
     city = null,
     phoneNumber = "01 89 71 30 76",
     variant = "default",
-    themeColor = 'rose'
+    themeColor = 'purple'
 }: HeaderProps) {
     const pathname = usePathname();
 
@@ -31,7 +31,7 @@ export default function Header({
     const buttonColors = {
         blue: "bg-blue-600 hover:bg-blue-700 shadow-blue-500/20",
         emerald: "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20",
-        amber: "bg-amber-600 hover:bg-amber-700 shadow-amber-500/20",
+        amber: "bg-purple-600 hover:bg-purple-700 shadow-purple-500/20",
         purple: "bg-purple-600 hover:bg-purple-700 shadow-purple-500/20",
         rose: "bg-stone-600 hover:bg-stone-700 shadow-stone-500/20",
     };

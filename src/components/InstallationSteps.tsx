@@ -12,7 +12,7 @@ export default function InstallationSteps() {
                 <div className="grid md:grid-cols-3 gap-8">
                     {steps.map((s, idx) => (
                         <div key={idx} className="bg-white p-6 rounded-xl border border-slate-200">
-                            <h3 className="font-bold text-lg text-amber-500 mb-2">{s.title}</h3>
+                            <h3 className="font-bold text-lg text-purple-500 mb-2">{s.title}</h3>
                             <p className="text-slate-600 text-sm" dangerouslySetInnerHTML={{ __html: s.desc }} />
                         </div>
                     ))}

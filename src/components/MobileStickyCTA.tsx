@@ -9,12 +9,12 @@ interface MobileStickyCTAProps {
 
 export default function MobileStickyCTA({
     targetId = "simulateur",
-    themeColor = 'rose'
+    themeColor = 'purple'
 }: MobileStickyCTAProps) {
     const gradients = {
         blue: "from-blue-600 to-blue-700 shadow-blue-500/30",
         emerald: "from-emerald-600 to-emerald-700 shadow-emerald-500/30",
-        amber: "from-amber-600 to-amber-700 shadow-amber-500/30",
+        amber: "from-purple-600 to-purple-700 shadow-purple-500/30",
         purple: "from-purple-600 to-purple-700 shadow-purple-500/30",
         rose: "from-stone-600 to-stone-700 shadow-stone-500/30",
     };

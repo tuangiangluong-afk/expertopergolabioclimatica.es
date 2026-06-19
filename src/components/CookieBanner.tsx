@@ -13,10 +13,8 @@ const CookieBanner = ({ slug, cityName }: CookieBannerProps) => {
     const [showBanner, setShowBanner] = useState(false);
 
     useEffect(() => {
-        // Check if user has already explicitly accepted or rejected
         const consent = localStorage.getItem('cookie-consent');
         if (!consent) {
-            // Small delay for animation entrance
             const timer = setTimeout(() => setShowBanner(true), 1000);
             return () => clearTimeout(timer);
         }
@@ -35,35 +33,35 @@ const CookieBanner = ({ slug, cityName }: CookieBannerProps) => {
     if (!showBanner) return null;
 
     return (
-        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-neutral-900/95 backdrop-blur-md border border-stone-500/30 rounded-2xl p-6 shadow-2xl shadow-stone-500/10 z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-neutral-900/95 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 shadow-2xl shadow-purple-500/10 z-50 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg shrink-0 bg-stone-500/10">
-                    <Cookie className="w-6 h-6 text-stone-400" />
+                <div className="p-2 rounded-lg shrink-0 bg-purple-500/10">
+                    <Cookie className="w-6 h-6 text-purple-400" />
                 </div>
                 <div className="flex-1">
                     <h3 className="text-lg font-semibold text-white mb-2">
-                        Confidentialité
+                        Privacidad & Cookies
                     </h3>
                     <p className="text-sm text-neutral-400 mb-4 leading-relaxed">
-                        Nous utilisons des cookies pour améliorer votre expérience sur le site de {cityName}. Pas de pistage intrusif, promis.
+                        Utilizamos cookies para mejorar tu experiencia en la web de {cityName}. Sin rastreos intrusivos, lo prometemos.
                         {' '}
-                        <Link href="/mentions-legales" className="underline text-stone-400 hover:text-stone-300 transition">
-                            En savoir plus
+                        <Link href="/mentions-legales" className="underline text-purple-400 hover:text-purple-300 transition">
+                            Saber más
                         </Link>
                     </p>
 
                     <div className="flex flex-col gap-2">
                         <button
                             onClick={acceptAll}
-                            className="w-full py-2 bg-stone-600 hover:bg-stone-500 text-white font-bold rounded-lg transition-colors"
+                            className="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg transition-colors"
                         >
-                            Tout accepter
+                            ${cityName ? "Aceptar todo" : "Aceptar todo"}
                         </button>
                         <button
                             onClick={rejectAll}
                             className="w-full py-2 bg-white/5 text-white font-medium rounded-lg hover:bg-white/10 transition-colors"
                         >
-                            Continuer sans accepter
+                            Continuar sin aceptar
                         </button>
                     </div>
                 </div>

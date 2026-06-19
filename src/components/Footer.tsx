@@ -15,31 +15,22 @@ export function Footer({ config }: FooterProps) {
     const neighborhoods = (config as any).neighborhoods || (config as any).quartiers || [];
     const theme = getTheme(config.slug);
 
-    // Group UNIQUE sites by region for the Mega Footer Directory
     const uniqueSites = Array.from(
         new Map(Object.values(SITES).map(site => [site.slug, site])).values()
     );
 
     const sitesByRegion = uniqueSites
-        .filter(site => site.slug !== 'home' && site.slug !== 'expertbetondecoratif.com' && site.slug !== 'www.expertbetondecoratif.com')
+        .filter(site => site.slug !== 'home' && site.slug !== 'expertopergolabioclimatica.es' && site.slug !== 'www.expertopergolabioclimatica.es')
         .reduce((acc, site) => {
-            const region = site.region || 'Autres Régions';
+            const region = site.region || 'Autres';
             if (!acc[region]) acc[region] = [];
             acc[region].push(site);
             return acc;
         }, {} as Record<string, SiteConfig[]>);
 
-    // Varied Anchor Logic (Local SEO)
     const getGlobalDiverseAnchor = (cityName: string, index: number) => {
-        const variations = [
-            `Pérgola Bioclimática ${cityName}`,
-            `Pérgola de Aluminio ${cityName}`,
-            `Cerramiento Terraza ${cityName}`,
-            `Porche de Aluminio ${cityName}`,
-            `Presupuesto Pérgola ${cityName}`,
-            `${cityName} (Chauffage Écologique)`
-        ];
-        return variations[index % variations.length];
+        const variations = ["Pérgola bioclimática ${cityName}","Instalación de pérgola ${cityName}","Pérgola aluminio ${cityName}","Fabricante de pérgolas ${cityName}","Diseño terraza ${cityName}"];
+        return variations[index % variations.length].replace(/\${cityName}/g, cityName);
     };
 
     return (
@@ -47,29 +38,30 @@ export function Footer({ config }: FooterProps) {
             <div className="container mx-auto px-4 text-center">
                 <h4 className="text-white font-bold mb-4">Sobre {config.name}</h4>
                 <p className="max-w-2xl mx-auto text-sm mb-8">
-                    {config.name} es la plataforma premium de referencia para el diseño e instalación de pérgolas de aluminio y cerramientos a medida en España.</p>
+                    {config.name} es el comparador de referencia para el diseño e instalación de pérgolas bioclimáticas en {config.city}. Solicita 3 diseños a medida de fabricantes de confianza.
+                </p>
 
-                <div className="inline-flex items-center gap-2 bg-stone-900/30 border border-stone-800 px-4 py-2 rounded-full mb-8">
-                    <span className="w-2 h-2 rounded-full bg-stone-500"></span>
-                    <span className="text-stone-400 font-bold text-sm">Réseau d&apos;Installateurs Certifiés RGE QualiPAC</span>
+                <div className="inline-flex items-center gap-2 bg-purple-500/10 border-purple-500/20 text-purple-400 px-4 py-2 rounded-full mb-8">
+                    <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <span className="font-bold text-sm">Fabricantes e Instaladores Premium</span>
                 </div>
 
                 <div className="border-t border-white/10 pt-12 mt-12">
                     <div className="grid md:grid-cols-4 gap-8 text-left max-w-7xl mx-auto">
-                        {/* Column 1: Zones / Quartiers */}
                         <div>
                             <h5 className="text-white font-bold mb-6 text-lg tracking-tight">
-                                {config.slug === 'home' ? 'Nuestras Provincias' : 'Zones d\'Intervention'}
+                                {config.slug === 'home' ? 'Provincias' : 'Provincias'}
                             </h5>
                             <ul className="space-y-3 text-sm">
                                 {config.slug === 'home' ? (
                                     <>
-                                        <li><Link href="/ville/paris" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-stone-500 transition"></span>Île-de-France</Link></li>
-                                        <li><Link href="/ville/lyon" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-stone-500 transition"></span>Auvergne-Rhône-Alpes</Link></li>
-                                        <li><Link href="/ville/marseille" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-stone-500 transition"></span>Provence-Alpes-Côte d&apos;Azur</Link></li>
-                                        <li><Link href="/ville/bordeaux" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-stone-500 transition"></span>Nouvelle-Aquitaine</Link></li>
-                                        <li><Link href="/ville/toulouse" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-stone-500 transition"></span>Occitanie</Link></li>
-                                        <li><Link href="/ville/nantes" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-stone-500 transition"></span>Pays de la Loire</Link></li>
+                                        
+            <li><Link href="/ville/madrid" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-purple-500 transition"></span>Madrid</Link></li>
+            <li><Link href="/ville/barcelona" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-purple-500 transition"></span>Barcelona</Link></li>
+            <li><Link href="/ville/valencia" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-purple-500 transition"></span>Valencia</Link></li>
+            <li><Link href="/ville/sevilla" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-purple-500 transition"></span>Sevilla</Link></li>
+            <li><Link href="/ville/malaga" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group"><span className="w-1 h-1 rounded-full bg-neutral-600 group-hover:bg-purple-500 transition"></span>Málaga</Link></li>
+        
                                     </>
                                 ) : (
                                     <>
@@ -82,30 +74,16 @@ export function Footer({ config }: FooterProps) {
                                             </li>
                                         ))}
                                         {neighborhoods.length === 0 && (
-                                            <li className="text-neutral-500 italic">Todo {config.city} y alrededores</li>
+                                            <li className="text-neutral-500 italic">Tout {config.city}</li>
                                         )}
                                     </>
                                 )}
                             </ul>
                         </div>
 
-                        {/* Column 2: Smart Network */}
                         <div>
                             <h5 className="text-white font-bold mb-6 text-lg tracking-tight">
-                                {(() => {
-                                    if (config.slug === 'home') return 'Nuestra Red';
-
-                                    const currentSite = config as SiteConfig;
-                                    const strictNeighbors = uniqueSites.filter(s => {
-                                        if (s.slug === 'home' || s.slug === currentSite.slug) return false;
-                                        if (!s.department || !currentSite.department) return false;
-                                        const sameDept = s.department === currentSite.department;
-                                        const sameRegion = s.region && currentSite.region && s.region === currentSite.region;
-                                        return sameDept || sameRegion;
-                                    });
-
-                                    return strictNeighbors.length > 0 ? 'Instaladores cercanos' : 'Nuestra Red';
-                                })()}
+                                Nuestra Red
                             </h5>
                             <ul className="space-y-3 text-sm">
                                 {(() => {
@@ -113,7 +91,7 @@ export function Footer({ config }: FooterProps) {
                                     const currentSite = config as SiteConfig;
 
                                     if (config.slug === 'home') {
-                                        const topSlugs = ['paris', 'marseille', 'lyon', 'bordeaux', 'nice'];
+                                        const topSlugs = ["madrid", "barcelona", "valencia", "sevilla"];
                                         nearbySites = uniqueSites.filter(s => topSlugs.includes(s.slug));
                                     } else {
                                         const sameDept = uniqueSites.filter(s => s.slug !== 'home' && s.slug !== currentSite.slug && s.department === currentSite.department);
@@ -130,14 +108,8 @@ export function Footer({ config }: FooterProps) {
                                     }
 
                                     const getVariedFooterAnchor = (cityName: string, index: number) => {
-                                        const variations = [
-                                            `Pérgola Bioclimática ${cityName}`,
-                                            `Pérgola de Aluminio ${cityName}`,
-                                            `Cerramiento Terraza ${cityName}`,
-                                            `Porche de Aluminio ${cityName}`,
-                                            `Presupuesto Pérgola ${cityName}`
-                                        ];
-                                        return variations[index % variations.length];
+                                        const variations = ["Pérgola bioclimática ${cityName}","Instalación de pérgola ${cityName}","Pérgola aluminio ${cityName}","Fabricante de pérgolas ${cityName}","Diseño terraza ${cityName}"];
+                                        return variations[index % variations.length].replace(/\${cityName}/g, cityName);
                                     };
 
                                     return nearbySites.map((site, index) => (
@@ -155,57 +127,50 @@ export function Footer({ config }: FooterProps) {
                             </ul>
                         </div>
 
-                        {/* Column 3: Solutions */}
                         <div>
-                            <h5 className="text-white font-bold mb-6 text-lg tracking-tight">Nuestras Guías</h5>
+                            <h5 className="text-white font-bold mb-6 text-lg tracking-tight">Guías y Consejos</h5>
                             <ul className="space-y-3 text-sm">
                                 <li>
-                                    <Link href="/guides/diseno-pergolas-bioclimaticas" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
+                                    <Link href="/guides/precio-pergola-aluminio-medida" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
                                         <span className={`w-1 h-1 rounded-full bg-neutral-600 group-hover:${theme.classes.bg} transition`}></span>
-                                        Aides &amp; Subventions 2026
+                                        Precio de pérgolas a medida
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/guides/ventajas-pergola-bioclimatica" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
                                         <span className={`w-1 h-1 rounded-full bg-neutral-600 group-hover:${theme.classes.bg} transition`}></span>
-                                        Ventajas de Pérgolas
+                                        Ventajas de pérgola bioclimática
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/guides/precio-pergola-aluminio-medida" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
+                                    <Link href="/guides/diseno-pergolas-bioclimaticas" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
                                         <span className={`w-1 h-1 rounded-full bg-neutral-600 group-hover:${theme.classes.bg} transition`}></span>
-                                        Precio a Medida
+                                        Diseños y cerramientos
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/guides" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
                                         <span className={`w-1 h-1 rounded-full bg-neutral-600 group-hover:${theme.classes.bg} transition`}></span>
-                                        Todas nuestras guías
+                                        Todas las guías
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/contact" className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
                                         <span className={`w-1 h-1 rounded-full bg-neutral-600 group-hover:${theme.classes.bg} transition`}></span>
-                                        Ser Instalador Colaborador
+                                        Registrarse como partner
                                     </Link>
                                 </li>
                             </ul>
                         </div>
 
-                        {/* Column 4: Marques & Contact */}
                         <div>
-                            <h5 className="text-white font-bold mb-6 text-lg tracking-tight">Marcas Ref.</h5>
+                            <h5 className="text-white font-bold mb-6 text-lg tracking-tight">Modelos</h5>
                             <ul className="space-y-3 text-sm mb-8">
-                                {[
-                                    { name: "Daikin", slug: "daikin" },
-                                    { name: "Mitsubishi", slug: "mitsubishi" },
-                                    { name: "Atlantic", slug: "atlantic" },
-                                    { name: "Viessmann", slug: "viessmann" }
-                                ].map((brand) => (
-                                    <li key={brand.slug}>
+                                {["Pérgola Adosada","Pérgola Autoportante","Estores Motorizados","Iluminación LED"].map((brand) => (
+                                    <li key={brand}>
                                         <Link href={`#simulateur`} className="text-neutral-400 hover:text-white transition flex items-center gap-2 group">
                                             <span className={`w-1 h-1 rounded-full bg-neutral-600 group-hover:${theme.classes.bg} transition`}></span>
-                                            Pérgolas {brand.name}
+                                            Opción {brand}
                                         </Link>
                                     </li>
                                 ))}
@@ -219,7 +184,7 @@ export function Footer({ config }: FooterProps) {
                                             <Mail size={20} />
                                         </div>
                                         <div>
-                                            <span className="block text-white font-bold text-lg">Contacto</span>
+                                            <span className="block text-white font-bold text-lg">${config.email}</span>
                                         </div>
                                     </Link>
                                 </li>
@@ -228,16 +193,15 @@ export function Footer({ config }: FooterProps) {
                     </div>
                 </div>
 
-                {/* MEGA FOOTER */}
                 <div className="border-t border-white/10 pt-12 mt-4 text-left max-w-7xl mx-auto mb-16 px-4 md:px-0">
                     <h5 className="text-white font-bold mb-8 text-xl tracking-tight text-center md:text-left">
-                        Nuestra Red National d&apos;Installateurs Pompes à Chaleur
+                        Nuestra Red de Instaladores de Pérgolas Bioclimáticas
                     </h5>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
                         {Object.entries(sitesByRegion).map(([region, sites]) => (
                             <div key={region} className="space-y-4">
                                 <h6 className="text-white/80 font-bold text-sm uppercase tracking-wider flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-stone-500/50"></span>
+                                    <span className="w-2 h-2 rounded-full bg-slate-500/50"></span>
                                     {region}
                                 </h6>
                                 <ul className="space-y-3 text-sm">
@@ -262,9 +226,9 @@ export function Footer({ config }: FooterProps) {
                     &copy; {new Date().getFullYear()} {config.name} - Todos los derechos reservados.
                 </div>
                 <div className="flex justify-center gap-4 text-xs mt-4 mb-2">
-                    <Link href={(config as any).basePath ? `${(config as any).basePath}/mentions-legales` : "/mentions-legales"} className="text-neutral-500 hover:text-white transition-colors">Aviso Legal</Link>
+                    <Link href="/mentions-legales" className="text-neutral-500 hover:text-white transition-colors">Aviso Legal</Link>
                     <span className="text-neutral-700">•</span>
-                    <Link href={(config as any).basePath ? `${(config as any).basePath}/cgv` : "/cgv"} className="text-neutral-500 hover:text-white transition-colors">Condiciones</Link>
+                    <Link href="/cgv" className="text-neutral-500 hover:text-white transition-colors">Condiciones</Link>
                 </div>
             </div>
         </footer>

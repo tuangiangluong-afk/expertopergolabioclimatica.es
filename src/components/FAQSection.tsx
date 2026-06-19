@@ -44,7 +44,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
         <div className="bg-white">
             <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors">
                 <span className="font-bold text-slate-900 pr-8" dangerouslySetInnerHTML={{ __html: question }} />
-                {isOpen ? <Minus className="w-5 h-5 text-amber-600 shrink-0" /> : <Plus className="w-5 h-5 text-slate-400 shrink-0" />}
+                {isOpen ? <Minus className="w-5 h-5 text-purple-600 shrink-0" /> : <Plus className="w-5 h-5 text-slate-400 shrink-0" />}
             </button>
             {isOpen && <div className="p-6 pt-0 text-slate-600 border-t border-slate-100 mt-2" dangerouslySetInnerHTML={{ __html: answer }} />}
         </div>

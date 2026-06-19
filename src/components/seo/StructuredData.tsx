@@ -4,29 +4,26 @@ export default function StructuredData() {
     const schema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Expert Béton Décoratif",
-        "url": "https://www.expertbetondecoratif.com",
-        "logo": "https://www.expertbetondecoratif.com/logo.png",
-        "description": "Réseau national d'installateurs de pompes à chaleur pour particuliers et professionnels. Installateurs certifiés RGE QualiPAC.",
-        "sameAs": [
-            "https://www.facebook.com/expertbetondecoratif",
-            "https://www.instagram.com/expertbetondecoratif"
-        ],
+        "name": "Experto Pérgola Bioclimática",
+        "url": "https://www.expertopergolabioclimatica.es",
+        "logo": "https://www.expertopergolabioclimatica.es/logo.png",
+        "description": "Red nacional de instaladores profesionales de pérgolas bioclimáticas a medida para terrazas y jardines en España.",
+        "sameAs": [],
         "foundingDate": "2020",
         "address": {
             "@type": "PostalAddress",
-            "addressCountry": "FR"
+            "addressCountry": "ES"
         },
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+33 1 84 80 00 00",
+            "telephone": "910 00 00 00",
             "contactType": "customer service",
-            "areaServed": "FR",
-            "availableLanguage": "French"
+            "areaServed": "ES",
+            "availableLanguage": "Spanish"
         },
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.expertbetondecoratif.com/ville/{search_term_string}",
+            "target": "https://www.expertopergolabioclimatica.es/ville/{search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };
@@ -34,11 +31,11 @@ export default function StructuredData() {
     const websiteSchema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "url": "https://www.expertbetondecoratif.com",
-        "name": "expertbetondecoratif",
+        "url": "https://www.expertopergolabioclimatica.es",
+        "name": "expertopergolabioclimatica",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.expertbetondecoratif.com/ville/{search_term_string}",
+            "target": "https://www.expertopergolabioclimatica.es/ville/{search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };
@@ -46,9 +43,9 @@ export default function StructuredData() {
     const serviceSchema = {
         "@context": "https://schema.org",
         "@type": "Service",
-        "serviceType": "Installation et Dépannage",
-        "provider": { "@type": "Organization", "name": "expertbetondecoratif" },
-        "areaServed": { "@type": "Country", "name": "France" }
+        "serviceType": "Instalación de Pérgolas Bioclimáticas",
+        "provider": { "@type": "Organization", "name": "expertopergolabioclimatica" },
+        "areaServed": { "@type": "Country", "name": "España" }
     };
 
     return (

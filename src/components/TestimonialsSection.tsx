@@ -29,7 +29,7 @@ export default function TestimonialsSection() {
                     {testimonials.map((t, idx) => (
                         <div key={idx} className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
                             <p className="text-slate-300 italic mb-4" dangerouslySetInnerHTML={{ __html: t.quote }} />
-                            <div className="font-bold">{t.name} - <span className="text-amber-500">{t.location}</span></div>
+                            <div className="font-bold">{t.name} - <span className="text-purple-500">{t.location}</span></div>
                             <div className="text-xs text-slate-500 mt-1">{t.product}</div>
                         </div>
                     ))}
