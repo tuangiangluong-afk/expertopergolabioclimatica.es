@@ -5,7 +5,7 @@ import { slugify } from '@/lib/slugify';
 import { createClient } from '@supabase/supabase-js';
 
 // Base URL (Hub)
-const BASE_URL = 'https://www.expertbetondecoratif.com';
+const BASE_URL = 'https://www.expertopergolabioclimatica.es';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const guides = getAllGuides();
