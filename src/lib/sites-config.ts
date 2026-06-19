@@ -57,14 +57,14 @@ const TEMPLATE_FEATURES = [
 
 const _hubConfig: SiteConfig = {
     slug: "home",
-    domain: "expertbetondecoratif.com",
+    domain: 'expertopergolabioclimatica.es',
     city: "France",
     postalCode: "",
     department: "",
     region: "National",
-    name: "Expert Béton Décoratif",
+    name: 'Experto Pérgola Bioclimática',
     phoneNumber: "01 84 80 00 00",
-    email: "contact@expertbetondecoratif.com",
+    email: 'contacto@expertopergolabioclimatica.es',
     targetType: "CONCRETE",
     priceRange: 'STANDARD',
     theme: 'premium',

@@ -1,5 +1,5 @@
 // ========================================
-// NATIONAL TARGETS - LOCALIZED ZONES
+// NATIONAL TARGETS - LOCALIZED ZONES (ES PERGOLAS)
 // ========================================
 
 export interface NationalTarget {
@@ -15,196 +15,16 @@ export interface NationalTarget {
 }
 
 export const NATIONAL_TARGETS: NationalTarget[] = [
-    {
-        "slug": "paris",
-        "name": "Paris",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 48.856,
-            "lng": 2.352
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "75000",
-        "tier": "BIG5",
-        "heroImage": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "lyon",
-        "name": "Lyon",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 45.764,
-            "lng": 4.835
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "69000",
-        "tier": "BIG5",
-        "heroImage": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "marseille",
-        "name": "Marseille",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 43.296,
-            "lng": 5.369
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "13000",
-        "tier": "BIG5",
-        "heroImage": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "nice",
-        "name": "Nice",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 43.71,
-            "lng": 7.262
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "06000",
-        "tier": "GOLDEN",
-        "heroImage": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "bordeaux",
-        "name": "Bordeaux",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 44.837,
-            "lng": -0.579
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "33000",
-        "tier": "GOLDEN",
-        "heroImage": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "toulouse",
-        "name": "Toulouse",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 43.604,
-            "lng": 1.444
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "31000",
-        "tier": "GOLDEN",
-        "heroImage": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "lille",
-        "name": "Lille",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 50.629,
-            "lng": 3.057
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "59000",
-        "tier": "STRATEGIC",
-        "heroImage": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "nantes",
-        "name": "Nantes",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 47.218,
-            "lng": -1.553
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "44000",
-        "tier": "STRATEGIC",
-        "heroImage": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "strasbourg",
-        "name": "Strasbourg",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 48.573,
-            "lng": 7.752
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "67000",
-        "tier": "STRATEGIC",
-        "heroImage": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop"
-    },
-    {
-        "slug": "montpellier",
-        "name": "Montpellier",
-        "heroTitle": "Béton Décoratif",
-        "geo": {
-            "lat": 43.61,
-            "lng": 3.876
-        },
-        "price_start": 75,
-        "top_places": [
-            "Centro",
-            "Residencial",
-            "Norte",
-            "Sur"
-        ],
-        "zip": "34000",
-        "tier": "STRATEGIC",
-        "heroImage": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?q=80&w=2672&auto=format&fit=crop"
-    }
+    { slug: "marbella", name: "Marbella", heroTitle: "Pérgola Bioclimática", geo: { lat: 36.5099, lng: -4.8863 }, price_start: 12000, top_places: ["Puerto Banús", "Nueva Andalucía", "Milla de Oro", "Las Chapas"], zip: "29600", tier: "BIG5" },
+    { slug: "malaga", name: "Málaga", heroTitle: "Pérgola Bioclimática", geo: { lat: 36.7213, lng: -4.4214 }, price_start: 11000, top_places: ["El Limonar", "Malagueta", "Teatinos", "Pedregalejo"], zip: "29001", tier: "BIG5" },
+    { slug: "alicante", name: "Alicante", heroTitle: "Pérgola Bioclimática", geo: { lat: 38.3452, lng: -0.4815 }, price_start: 10500, top_places: ["Cabo de las Huertas", "Playa de San Juan", "Vistahermosa"], zip: "03001", tier: "BIG5" },
+    { slug: "ibiza", name: "Ibiza", heroTitle: "Pérgola Bioclimática", geo: { lat: 38.9089, lng: 1.4324 }, price_start: 13000, top_places: ["Marina Botafoc", "Dalt Vila", "Jesús", "Talamanca"], zip: "07800", tier: "GOLDEN" },
+    { slug: "palma-de-mallorca", name: "Palma de Mallorca", heroTitle: "Pérgola Bioclimática", geo: { lat: 39.5696, lng: 2.6502 }, price_start: 12000, top_places: ["Son Vida", "Portixol", "Santa Catalina", "Génova"], zip: "07001", tier: "GOLDEN" },
+    { slug: "sitges", name: "Sitges", heroTitle: "Pérgola Bioclimática", geo: { lat: 41.2372, lng: 1.8059 }, price_start: 11500, top_places: ["Vinyet", "Terramar", "Aiguadolç", "Centro"], zip: "08870", tier: "STRATEGIC" },
+    { slug: "costa-brava", name: "Costa Brava", heroTitle: "Pérgola Bioclimática", geo: { lat: 41.9794, lng: 3.0180 }, price_start: 11000, top_places: ["Begur", "Calella", "Llafranc", "Platja d'Aro"], zip: "17001", tier: "STRATEGIC" },
+    { slug: "valencia", name: "Valencia", heroTitle: "Pérgola Bioclimática", geo: { lat: 39.4699, lng: -0.3763 }, price_start: 10500, top_places: ["Patacona", "Campanar", "Gran Vía", "La Canyada"], zip: "46001", tier: "STRATEGIC" },
+    { slug: "benidorm", name: "Benidorm", heroTitle: "Pérgola Bioclimática", geo: { lat: 38.5411, lng: -0.1225 }, price_start: 10500, top_places: ["Poniente", "Levante", "Rincón de Loix"], zip: "03501", tier: "STRATEGIC" },
+    { slug: "estepona", name: "Estepona", heroTitle: "Pérgola Bioclimática", geo: { lat: 36.4256, lng: -5.1484 }, price_start: 11500, top_places: ["Bel-Air", "Atalaya", "Cancelada", "Puerto"], zip: "29680", tier: "STRATEGIC" }
 ];
 
 export function getTargetBySlug(slug: string): NationalTarget | undefined {
@@ -217,26 +37,26 @@ export function getTargetAsCityConfig(slug: string): CityConfig | undefined {
     const target = NATIONAL_TARGETS.find(t => t.slug === slug);
     if (!target) return undefined;
 
-    const priceDisplay = "€" + target.price_start + (target.price_start < 500 ? "/m²" : "");
-    const priceDesc = "Étude & Devis sous 48h";
+    const priceDisplay = target.price_start + " €";
+    const priceDesc = "Proyecto a Medida";
 
     return {
         slug: target.slug,
         city: target.name,
         name: `${target.heroTitle} ${target.name}`,
-        domain: `${target.slug}.localhost`, // rewrite target
+        domain: `${target.slug}.expertopergolabioclimatica.es`, // rewrite target
         heroImage: target.heroImage || "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop",
         postalCode: target.zip,
-        department: target.zip.substring(0, 2),
-        region: "France",
-        description: `${target.heroTitle} ${target.name} (${target.zip}).`,
+        department: "ES",
+        region: "España",
+        description: `${target.heroTitle} a medida en ${target.name} (${target.zip}).`,
         geo: target.geo,
         features: [
-            "Devis 48h",
-            "Rendimiento Garanti",
-            "Certificación RGE/FIDE",
-            "Garantía total",
-            "Estudio Gratis"
+            "Aluminio Premium",
+            "Lamas Orientables",
+            "Domótica Integrada",
+            "Iluminación LED",
+            "Diseño Personalizado"
         ],
         stations: [],
         hospitals: [],
@@ -252,13 +72,13 @@ export function getTargetAsCityConfig(slug: string): CityConfig | undefined {
             description: priceDesc,
             km: 0
         },
-        phoneNumber: "01 84 80 00 00",
-        email: "contact@expertbetondecoratif.com",
+        phoneNumber: "900 000 000",
+        email: "contacto@expertopergolabioclimatica.es",
         type: "PARTNER",
         targetType: "MIXED",
         meta: {
             title: `${target.heroTitle} ${target.name} | ${priceDisplay}`,
-            description: `${target.heroTitle} ${target.name} ${target.zip}.`
+            description: `Pérgolas bioclimáticas de aluminio a medida en ${target.name} (${target.zip}). Transforme su espacio exterior con acabados premium.`
         }
     };
 }

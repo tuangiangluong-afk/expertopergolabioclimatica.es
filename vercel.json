@@ -9,10 +9,10 @@
             "has": [
                 {
                     "type": "host",
-                    "value": "www.expertbetondecoratif.com"
+                    "value": "www.expertopergolabioclimatica.es"
                 }
             ],
-            "destination": "https://expertbetondecoratif.com/:path",
+            "destination": "https://expertopergolabioclimatica.es/:path",
             "statusCode": 301
         }
     ],

@@ -12,111 +12,90 @@ export interface PseoPageContent {
     expert_tip: string;
 }
 
-const REGIONAL_DATA: Record<string, { subsidyName: string; subsidyAmount: string; avgPrice: string; }> = {
-    "75": { subsidyName: "MaPrimeRénov' Paris", subsidyAmount: "MaPrimeRénov' + CEE + Aide Ville de Paris", avgPrice: "8 000€ – 18 000€" },
-    "69": { subsidyName: "MaPrimeRénov' Métropole Lyon", subsidyAmount: "MaPrimeRénov' + CEE + Aide Métropole de Lyon", avgPrice: "7 500€ – 16 000€" },
-    "13": { subsidyName: "MaPrimeRénov' Bouches-du-Rhône", subsidyAmount: "MaPrimeRénov' + CEE + Prime départementale 13", avgPrice: "7 000€ – 15 000€" },
-    "06": { subsidyName: "MaPrimeRénov' Alpes-Maritimes", subsidyAmount: "MaPrimeRénov' + CEE + Aide MNCA", avgPrice: "7 500€ – 16 500€" },
-    "33": { subsidyName: "MaPrimeRénov' Gironde", subsidyAmount: "MaPrimeRénov' + CEE + Aide Bordeaux Métropole", avgPrice: "7 000€ – 15 500€" },
-    "59": { subsidyName: "MaPrimeRénov' Nord", subsidyAmount: "MaPrimeRénov' + CEE + Aide locale MEL", avgPrice: "7 000€ – 15 000€" },
-    "44": { subsidyName: "MaPrimeRénov' Loire-Atlantique", subsidyAmount: "MaPrimeRénov' + CEE + Aide régionale Pays de la Loire", avgPrice: "7 000€ – 15 000€" }
-};
+const REGIONAL_DATA: Record<string, { subsidyName: string; subsidyAmount: string; avgPrice: string; }> = {};
 
 const DEFAULT_REGIONAL = {
-    subsidyName: "MaPrimeRénov' & CEE",
-    subsidyAmount: "Jusqu'à 11 000€ de MaPrimeRénov' + Certificats d'Économie d'Énergie",
-    avgPrice: "7 000€ – 16 000€"
+    subsidyName: "Diseño a medida",
+    subsidyAmount: "Proyecto llave en mano",
+    avgPrice: "10.000€ – 25.000€"
 };
 
-function getExpertTip(city: string, dept: string, neighborhoods: string[]): string {
-    const hash = city.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-    const isFrance = city.toLowerCase() === "france";
-    const prep = isFrance ? "en" : "à";
+type SpintaxType = "meta_title" | "meta_description" | "hero_title" | "hero_subtitle" | "cta_primary";
+type SpintaxContext = "HUB" | "LOCAL";
 
-    const tips = [
-        `Pour une installation de pompe à chaleur ${prep} ${city}, nous recommandons une PAC air-eau si vous disposez déjà de radiateurs à eau chaude ou d'un plancher chauffant. Nos installateurs RGE QualiPAC partenaires réalisent l'étude thermique et le dimensionnement sous 24h.`,
-        `À ${city}, coupler votre pompe à chaleur air-eau avec un ballon thermodynamique vous permet de couvrir 100% de vos besoins en chauffage ET eau chaude sanitaire. ${isFrance ? "Notre réseau" : `En ${dept}, nos artisans`} certifiés QualiPAC réalisent l'étude sous 24h.`,
-        `Les aides MaPrimeRénov' ${prep} ${city} pour le remplacement d'une chaudière fioul ou gaz par une pompe à chaleur peuvent atteindre 11 000€. Pensez à faire valider votre éligibilité avant de signer un devis.`,
-        `Pour optimiser le rendement de votre PAC ${prep} ${city}, veillez à bien isoler votre logement au préalable. Un COP de 4 signifie que pour 1 kWh d'électricité consommé, la PAC produit 4 kWh de chaleur.`,
-    ];
-    return tips[hash % tips.length];
-}
+const templates: Record<SpintaxType, Record<SpintaxContext, string[]>> = {
+    meta_title: {
+        HUB: [
+            "Las Mejores Pérgolas Bioclimáticas en {city} | Fabricantes",
+            "Pérgolas de Aluminio a Medida {city} | Compara Presupuestos",
+            "Expertos en Pérgolas Bioclimáticas y Cerramientos en {city}"
+        ],
+        LOCAL: [
+            "Pérgolas Bioclimáticas a Medida en {city} | Instaladores Premium",
+            "Tu Pérgola de Aluminio en {city} | Diseño y Elegancia",
+            "Instalación de Pérgolas Bioclimáticas de Lujo en {city}"
+        ]
+    },
+    meta_description: {
+        HUB: [
+            "Encuentra los mejores fabricantes e instaladores de pérgolas bioclimáticas en {city}. Compara precios para transformar tu terraza o jardín.",
+            "Directorio de especialistas en cerramientos y pérgolas de aluminio en {city}. Solicita hasta 3 diseños y presupuestos sin compromiso."
+        ],
+        LOCAL: [
+            "Transforma el exterior de tu chalet en {city}. Instalación de pérgolas bioclimáticas de aluminio con lamas orientables y motorizadas. Calidad premium.",
+            "Disfruta de tu terraza todo el año en {city}. Pérgolas a medida, cerramientos de cristal e iluminación LED integrada. Presupuesto sin compromiso."
+        ]
+    },
+    hero_title: {
+        HUB: [
+            "Los Mejores Fabricantes de <span class=\"text-stone-600\">Pérgolas Bioclimáticas</span> en {city}",
+            "Pérgolas a Medida en <span class=\"text-stone-600\">{city}</span>: Compara Opciones",
+            "Diseña tu Terraza Perfecta en <span class=\"text-stone-600\">{city}</span>"
+        ],
+        LOCAL: [
+            "Instalación de <span class=\"text-stone-600\">Pérgolas Bioclimáticas</span> en {city}",
+            "Lujo y Confort para tu Terraza en <span class=\"text-stone-600\">{city}</span>",
+            "Expertos en <span class=\"text-stone-600\">Estructuras de Aluminio</span> en {city}"
+        ]
+    },
+    hero_subtitle: {
+        HUB: [
+            "Conecta con los líderes en cerramientos de exterior. Recibe diseños y presupuestos personalizados para revalorizar tu propiedad.",
+            "Protección solar, domótica y diseño vanguardista. Compara precios de empresas especialistas en pérgolas de aluminio."
+        ],
+        LOCAL: [
+            "Lamas orientables motorizadas, iluminación LED y cerramientos de cristal. Crea un nuevo espacio en tu hogar con nuestros acabados de lujo.",
+            "Fabricación a medida e instalación impecable en {city}. Convierte tu jardín en un oasis disfrutable los 365 días del año."
+        ]
+    },
+    cta_primary: {
+        HUB: ["Solicitar 3 Presupuestos"],
+        LOCAL: ["Pedir Presupuesto a Medida"]
+    }
+};
 
-function getIntroHtml(city: string, dept: string, neighborhoods: string[], postalCode: string, avgPrice: string): string {
-    const hash = city.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-    const isFrance = city.toLowerCase() === "france";
-    const prep = isFrance ? "en" : "à";
+export async function getPseoContent(cityConfig: CityConfig, isHub: boolean = false): Promise<PseoPageContent> {
+    const context: SpintaxContext = isHub ? "HUB" : "LOCAL";
+    const cityHash = cityConfig.city.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const pick = (arr: string[]) => arr[cityHash % arr.length];
+    
+    const replaceVars = (text: string) => {
+        return text
+            .replace(/{city}/g, cityConfig.city)
+            .replace(/{dept}/g, cityConfig.department || "");
+    };
 
-    const neighborhoodMention = neighborhoods.length >= 2
-        ? `Nos techniciens QualiPAC interviennent dans tous les secteurs : <strong>${neighborhoods.slice(0, 3).join(', ')}</strong> et communes environnantes.`
-        : "";
-
-    const postalCodeMention = postalCode ? ` (${postalCode})` : "";
-
-    const intros = [
-        `<p class="mb-4">
-            Vous souhaitez installer une <strong>pompe à chaleur</strong> ${prep} <strong>${city}${postalCodeMention}</strong> pour réduire vos factures de chauffage ? 
-            Notre réseau d'installateurs qualifiés <strong>RGE QualiPAC</strong> conçoit et réalise la pose de votre système de chauffage performant (PAC air-eau ou air-air).
-            ${neighborhoodMention}
-        </p>
-        <p>
-            Une installation standard de PAC air-eau ${prep} ${city} coûte généralement entre <strong>${avgPrice}</strong> avant déduction des aides. 
-            Le remplacement de votre ancienne chaudière par une pompe à chaleur vous permet d'économiser jusqu'à <strong>70%</strong> sur votre facture de chauffage annuelle.
-        </p>`,
-
-        `<p class="mb-4">
-            Chauffez votre logement efficacement ${prep} <strong>${city}</strong>${dept ? ` (${dept})` : ''} et protégez-vous contre la hausse des prix de l'énergie fossile. 
-            Nos experts en pompes à chaleur réalisent une étude thermique gratuite sur-mesure pour évaluer les besoins de votre habitat et estimer vos économies futures.
-        </p>
-        <p>
-            ${neighborhoodMention} Budget estimé : <strong>${avgPrice}</strong> tout compris avant déduction des aides MaPrimeRénov' et CEE. 
-            Nous vous aidons à constituer votre dossier de subventions pour maximiser vos aides.
-        </p>`,
-
-        `<p class="mb-4">
-            Passez au chauffage haute performance ${prep} <strong>${city}</strong> en profitant des aides de l'État pour la rénovation énergétique. 
-            Nos installateurs certifiés RGE QualiPAC vous garantissent des équipements de grandes marques (Daikin, Atlantic, Mitsubishi, Panasonic) garantis jusqu'à 10 ans.
-        </p>
-        <p>
-            De l'étude thermique à la mise en service ${prep} ${city}, nous prenons en charge 100% des démarches administratives et le dossier MaPrimeRénov'. 
-            ${neighborhoodMention}
-        </p>`,
-    ];
-
-    return intros[hash % intros.length];
-}
-
-export async function getPseoContent(cityConfig: CityConfig, targetType: string = 'MIXED'): Promise<PseoPageContent> {
-    const { city, department, region, postalCode, neighborhoods, pricing } = cityConfig;
-    const dept = department || "";
-    const postal = postalCode || "";
-    const quartiers = neighborhoods || [];
-
-    const deptCode = dept.length >= 2 ? dept.substring(0, 2) : "";
-    const regionalInfo = REGIONAL_DATA[deptCode] || DEFAULT_REGIONAL;
-
-    const realPrice = pricing?.base || "Sur Devis";
-
-    const isFrance = city.toLowerCase() === "france";
-    const prep = isFrance ? "en" : "à";
-
-    const meta_title = `Installateur Pompe à Chaleur ${isFrance ? "en France" : city}${postal ? ` (${postal})` : ''} | RGE QualiPAC`;
-    const meta_description = `Installation de pompe à chaleur air-eau et air-air ${prep} ${city} par un artisan certifié RGE QualiPAC. Économisez jusqu'à 70% sur votre chauffage. Devis gratuit sous 24h.`;
-
-    const hero_title = `Installateur <span class="text-rose-500">Pompe à Chaleur</span> ${prep} ${city}${postal ? ` <span class="text-slate-400 text-3xl">(${postal})</span>` : ''}`;
-    const hero_badge = regionalInfo.subsidyName;
-
-    const intro_html = getIntroHtml(city, dept, quartiers, postal, regionalInfo.avgPrice);
+    const regional = DEFAULT_REGIONAL;
 
     return {
-        meta_title,
-        meta_description,
-        hero_title,
-        hero_badge,
-        intro_html,
-        cta_primary: "Simuler mes aides chauffage",
-        pricing_estimated: realPrice,
-        regional_subsidy: regionalInfo.subsidyAmount,
-        expert_tip: getExpertTip(city, dept, quartiers),
+        meta_title: replaceVars(pick(templates.meta_title[context])),
+        meta_description: replaceVars(pick(templates.meta_description[context])),
+        hero_title: replaceVars(pick(templates.hero_title[context])),
+        hero_badge: isHub ? "Diseño a medida" : `Instalador Premium en ${cityConfig.city}`,
+        intro_html: replaceVars(pick(templates.hero_subtitle[context])),
+        cta_primary: pick(templates.cta_primary[context]),
+        pricing_estimated: regional.avgPrice,
+        regional_subsidy: "",
+        expert_tip: `Revaloriza tu chalet en ${cityConfig.city} con acabados de lujo y domótica integrada.`
     };
 }

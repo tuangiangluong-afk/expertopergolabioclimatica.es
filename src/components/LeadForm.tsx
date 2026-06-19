@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Home, User, Shield, Phone, Mail, User2, ArrowRight, ArrowLeft, CheckCircle, TrendingDown, Zap, AlertTriangle } from "lucide-react";
-import Link from "next/link";
+import { Home, User, Shield, Phone, Mail, User2, ArrowRight, ArrowLeft, CheckCircle, TrendingUp, Zap } from "lucide-react";
 
 interface LeadFormProps {
     city: string;
@@ -23,7 +22,7 @@ interface FormData {
     zipCode: string;
 }
 
-const PHONE_REGEX = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
+const PHONE_REGEX = /^(?:\+?34)?\s*[6789](?:[\s.-]*\d){8}$/;
 const ZIP_CODE_REGEX = /^\d{5}$/;
 
 export default function LeadForm({ city, domain, initialProjectType }: LeadFormProps) {
@@ -78,10 +77,17 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
     const nextStep = () => { if (canProceed() && step < totalSteps) setStep(step + 1); };
     const prevStep = () => { if (step > 1) setStep(step - 1); };
 
+    const getLeadScore = (): number => {
+        let score = 50;
+        if (formData.projectType === 'terrasse') score += 10;
+        if (formData.monthlyBill === 'plus_50') score += 40; // >30m2 is high ticket pergola booster (+50/40)
+        return score;
+    };
+
     const handleSubmit = async () => {
         if (!canProceed()) {
             setStatus('error');
-            setErrorMessage("Veuillez renseigner tous les champs requis.");
+            setErrorMessage("Por favor, rellene todos los campos correctamente.");
             return;
         }
 
@@ -92,9 +98,9 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
                 city,
                 postalCode: formData.zipCode,
                 domain,
-                niche: 'beton',
-                country: 'FR',
-                leadScore: formData.monthlyBill === 'plus_50' ? 80 : 50,
+                niche: 'pergola',
+                country: 'ES',
+                leadScore: getLeadScore(),
                 timestamp: new Date().toISOString()
             };
 
@@ -104,7 +110,7 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
                 body: JSON.stringify(payload)
             });
 
-            if (!res.ok) throw new Error("Erreur d'envoi");
+            if (!res.ok) throw new Error('Error al enviar');
             
             const data = await res.json();
             if (data?.vud?.devis_id) {
@@ -114,17 +120,17 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
             setStatus('success');
         } catch (error: any) {
             setStatus('error');
-            setErrorMessage(error.message || 'Une erreur est survenue');
+            setErrorMessage(error.message || 'Error');
         }
     };
 
     if (status === 'success') {
         return (
-            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 rounded-3xl p-8 text-center">
-                <CheckCircle className="text-amber-500 mx-auto mb-4" size={40} />
-                <h3 className="text-2xl font-bold text-amber-800 mb-3">Votre demande de devis est validée !</h3>
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50/30 border border-purple-200 rounded-3xl p-8 text-center">
+                <CheckCircle className="text-purple-600 mx-auto mb-4" size={40} />
+                <h3 className="text-2xl font-bold text-purple-800 mb-3">¡Solicitud de diseño recibida!</h3>
                 <p className="text-neutral-700 mb-6">
-                    Votre demande a été transmise. Nos artisans partenaires certifiés en béton décoratif vont réaliser vos devis sous **24h** pour votre projet à **{city}**.
+                    Su solicitud ha sido registrada correctamente. Un especialista en pérgolas de aluminio se pondrá en contacto con usted en **24 horas** para su proyecto en **{city}**.
                 </p>
             </div>
         );
@@ -132,36 +138,29 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
 
     return (
         <div className="bg-white rounded-3xl shadow-2xl border border-neutral-200 overflow-hidden font-sans">
-            <div className="bg-gradient-to-r from-amber-500 to-yellow-500 p-6 text-slate-900">
-                <h3 className="font-bold text-lg">Simulateur Béton Décoratif 2026</h3>
-                <div className="h-2 bg-slate-900/10 rounded-full mt-4">
-                    <div className="h-full bg-slate-900 rounded-full" style={{ width: `${progress}%` }} />
+            <div className="bg-gradient-to-r from-purple-700 to-indigo-600 p-6 text-white">
+                <h3 className="font-bold text-lg">Diseñador de Pérgolas 2026</h3>
+                <div className="h-2 bg-white/20 rounded-full mt-4">
+                    <div className="h-full bg-white rounded-full" style={{ width: `${progress}%` }} />
                 </div>
             </div>
 
             <div className="p-6">
                 {step === 1 && (
                     <div className="space-y-4">
-                        <h4 className="text-xl font-bold text-neutral-900 mb-4">Quel est le type de projet ?</h4>
+                        <h4 className="text-xl font-bold text-neutral-900 mb-4">¿Cuál es el tipo de su vivienda?</h4>
                         <button onClick={() => { handleOptionSelect('projectType', 'terrasse'); setStep(2); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
-                            <Home className="text-amber-500" />
+                            <Home className="text-purple-500" />
                             <div>
-                                <div className="font-bold">Terrasse en béton</div>
-                                <div className="text-sm text-neutral-500">Pour un espace de vie extérieur convivial</div>
+                                <div className="font-bold">Chalet independiente / Pareado</div>
+                                <div className="text-sm text-neutral-500">Espacio ideal para pérgola o porche de aluminio</div>
                             </div>
                         </button>
                         <button onClick={() => { handleOptionSelect('projectType', 'allee_garage'); setStep(2); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
                             <Home />
                             <div>
-                                <div className="font-bold">Allée de garage ou cour</div>
-                                <div className="text-sm text-neutral-500">Béton carrossable haute résistance</div>
-                            </div>
-                        </button>
-                        <button onClick={() => { handleOptionSelect('projectType', 'tour_piscine'); setStep(2); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
-                            <Home />
-                            <div>
-                                <div className="font-bold">Tour de piscine (plage)</div>
-                                <div className="text-sm text-neutral-500">Béton anti-dérapant et esthétique</div>
+                                <div className="font-bold">Ático o piso con gran terraza</div>
+                                <div className="text-sm text-neutral-500">Apto para pérgolas autoportantes o adosadas</div>
                             </div>
                         </button>
                     </div>
@@ -169,26 +168,26 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
 
                 {step === 2 && (
                     <div className="space-y-4">
-                        <h4 className="text-xl font-bold text-neutral-900 mb-4">Quelle est la surface estimée du projet ?</h4>
+                        <h4 className="text-xl font-bold text-neutral-900 mb-4">¿Tamaño estimado de la terraza/jardín a cubrir?</h4>
                         <button onClick={() => { handleOptionSelect('monthlyBill', 'plus_50'); setStep(3); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
-                            <TrendingDown className="text-amber-500" />
+                            <TrendingUp className="text-purple-500" />
                             <div>
-                                <div className="font-bold">Plus de 50 m²</div>
-                                <div className="text-sm text-neutral-500">Tarif au m² dégressif</div>
+                                <div className="font-bold">Más de 30m²</div>
+                                <div className="text-sm text-neutral-500">Espacio amplio, ideal para proyectos premium</div>
                             </div>
                         </button>
                         <button onClick={() => { handleOptionSelect('monthlyBill', '20_50'); setStep(3); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
                             <Zap />
                             <div>
-                                <div className="font-bold">Entre 20 et 50 m²</div>
-                                <div className="text-sm text-neutral-500">Taille de projet standard</div>
+                                <div className="font-bold">Entre 15m² y 30m²</div>
+                                <div className="text-sm text-neutral-500">Tamaño estándar de terraza o porche</div>
                             </div>
                         </button>
                         <button onClick={() => { handleOptionSelect('monthlyBill', 'moins_20'); setStep(3); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
                             <Zap />
                             <div>
-                                <div className="font-bold">Moins de 20 m²</div>
-                                <div className="text-sm text-neutral-500">Petite surface</div>
+                                <div className="font-bold">Menos de 15m²</div>
+                                <div className="text-sm text-neutral-500">Proyecto compacto a medida</div>
                             </div>
                         </button>
                     </div>
@@ -196,19 +195,19 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
 
                 {step === 3 && (
                     <div className="space-y-4">
-                        <h4 className="text-xl font-bold text-neutral-900 mb-4">L&apos;accès pour un camion toupie de béton est-il possible ?</h4>
+                        <h4 className="text-xl font-bold text-neutral-900 mb-4">¿Qué tipo de estructura exterior prefiere?</h4>
                         <button onClick={() => { handleOptionSelect('roofType', 'toupie_oui'); setStep(4); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
-                            <Home className="text-amber-500" />
+                            <Home className="text-purple-500" />
                             <div>
-                                <div className="font-bold">Oui, accès direct possible</div>
-                                <div className="text-sm text-neutral-500">Livraison de béton facilitée</div>
+                                <div className="font-bold">Pérgola Bioclimática</div>
+                                <div className="text-sm text-neutral-500">Lamas de aluminio orientables motorizadas</div>
                             </div>
                         </button>
                         <button onClick={() => { handleOptionSelect('roofType', 'toupie_non'); setStep(4); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
-                            <AlertTriangle />
+                            <Home />
                             <div>
-                                <div className="font-bold">Non, le camion ne peut pas approcher</div>
-                                <div className="text-sm text-neutral-500">Prévoir tapis ou pompe à béton</div>
+                                <div className="font-bold">Cerramientos de cristal / Toldo</div>
+                                <div className="text-sm text-neutral-500">Cortinas de vidrio o toldos motorizados</div>
                             </div>
                         </button>
                     </div>
@@ -216,19 +215,19 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
 
                 {step === 4 && (
                     <div className="space-y-4">
-                        <h4 className="text-xl font-bold text-neutral-900 mb-4">Quel type de béton décoratif souhaitez-vous ?</h4>
+                        <h4 className="text-xl font-bold text-neutral-900 mb-4">¿Dispone ya de una estructura a sustituir o reformar?</h4>
                         <button onClick={() => { handleOptionSelect('solarLocation', 'beton_desactive'); setStep(5); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
-                            <Zap className="text-amber-500" />
+                            <Zap className="text-purple-500" />
                             <div>
-                                <div className="font-bold">Béton désactivé (aspect gravillons)</div>
-                                <div className="text-sm text-neutral-500">Idéal pour les allées, anti-dérapant</div>
+                                <div className="font-bold">Sí, una estructura o toldo antiguo</div>
+                                <div className="text-sm text-neutral-500">Reforma y renovación completa</div>
                             </div>
                         </button>
                         <button onClick={() => { handleOptionSelect('solarLocation', 'beton_imprime'); setStep(5); }} className="w-full p-4 border rounded-xl text-left hover:bg-neutral-50 flex items-center gap-4">
                             <Zap />
                             <div>
-                                <div className="font-bold">Béton imprimé (aspect pierre, bois)</div>
-                                <div className="text-sm text-neutral-500">Esthétique personnalisée infinie</div>
+                                <div className="font-bold">No, es un espacio completamente libre</div>
+                                <div className="text-sm text-neutral-500">Nueva estructura e instalación de obra limpia</div>
                             </div>
                         </button>
                     </div>
@@ -236,15 +235,15 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
 
                 {step === 5 && (
                     <div className="space-y-4">
-                        <h4 className="text-xl font-bold text-neutral-900 mb-4">Recevez vos devis gratuits</h4>
-                        <input type="text" name="name" placeholder="Nom complet" value={formData.name} onChange={handleInputChange} className="w-full p-3 border rounded-xl outline-none focus:border-amber-500" />
-                        <input type="text" name="zipCode" placeholder="Code Postal" value={formData.zipCode} onChange={handleInputChange} maxLength={5} className="w-full p-3 border rounded-xl outline-none focus:border-amber-500" />
-                        <input type="email" name="email" placeholder="Adresse email" value={formData.email} onChange={handleInputChange} className="w-full p-3 border rounded-xl outline-none focus:border-amber-500" />
-                        <input type="tel" name="phone" placeholder="Numéro de téléphone" value={formData.phone} onChange={handleInputChange} className="w-full p-3 border rounded-xl outline-none focus:border-amber-500" />
+                        <h4 className="text-xl font-bold text-neutral-900 mb-4">Solicite su diseño y presupuesto a medida</h4>
+                        <input type="text" name="name" placeholder="Nombre completo" value={formData.name} onChange={handleInputChange} className="w-full p-3 border rounded-xl outline-none focus:border-purple-500" />
+                        <input type="text" name="zipCode" placeholder="Código Postal (ej. 29600)" value={formData.zipCode} onChange={handleInputChange} maxLength={5} className="w-full p-3 border rounded-xl outline-none focus:border-purple-500" />
+                        <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleInputChange} className="w-full p-3 border rounded-xl outline-none focus:border-purple-500" />
+                        <input type="tel" name="phone" placeholder="Número de teléfono" value={formData.phone} onChange={handleInputChange} className="w-full p-3 border rounded-xl outline-none focus:border-purple-500" />
                         {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
                         
-                        <button onClick={handleSubmit} disabled={status === 'loading'} className="w-full py-4 bg-amber-500 text-slate-900 rounded-xl font-bold text-lg hover:bg-amber-600 transition">
-                            {status === 'loading' ? 'Envoi...' : 'Obtenir mes devis béton décoratif'}
+                        <button onClick={handleSubmit} disabled={status === 'loading'} className="w-full py-4 bg-purple-700 hover:bg-purple-800 text-white rounded-xl font-bold text-lg transition">
+                            {status === 'loading' ? 'Enviando...' : 'Pedir presupuesto a medida'}
                         </button>
                     </div>
                 )}
@@ -252,7 +251,7 @@ export default function LeadForm({ city, domain, initialProjectType }: LeadFormP
                 <div className="flex gap-3 mt-6">
                     {step > 1 && (
                         <button onClick={prevStep} className="px-6 py-2 border rounded-xl hover:bg-neutral-50">
-                            Retour
+                            Atrás
                         </button>
                     )}
                 </div>

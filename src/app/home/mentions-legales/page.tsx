@@ -15,13 +15,13 @@ export default function MentionsLegales() {
                 <div className="container mx-auto flex items-center justify-between">
                     <Link
                         href="/"
-                        className="flex items-center gap-2 text-sm font-bold hover:text-rose-400 transition"
+                        className="flex items-center gap-2 text-sm font-bold hover:text-stone-400 transition"
                     >
                         <ArrowLeft size={16} />
                         Retour Accueil
                     </Link>
                     <span className="text-sm font-bold">
-                        Expert Béton Décoratif<span className="text-rose-500">.</span>
+                        Expert Béton Décoratif<span className="text-stone-500">.</span>
                     </span>
                 </div>
             </nav>
@@ -33,7 +33,7 @@ export default function MentionsLegales() {
 
                 <div className="prose prose-neutral prose-lg max-w-none">
                     <div className="mb-8 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-                        <h2 className="mb-4 text-2xl font-bold text-rose-900">1. Éditeur du Site</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-stone-900">1. Éditeur du Site</h2>
                         <p>
                             Le site <strong>Expert Béton Décoratif</strong> (expertbetondecoratif.com) est édité par la société <strong>WELINK TECH</strong>.
                         </p>
@@ -43,19 +43,19 @@ export default function MentionsLegales() {
                             <li><strong>SIREN :</strong> 984 800 136</li>
                             <li><strong>SIRET :</strong> 984 800 136 00017</li>
                             <li><strong>Responsable de publication :</strong> Direction WELINK TECH</li>
-                            <li><strong>Contact :</strong> <Link href="/contact" className="underline text-rose-600">Formulaire de contact</Link></li>
+                            <li><strong>Contact :</strong> <Link href="/contact" className="underline text-stone-600">Formulaire de contact</Link></li>
                         </ul>
                     </div>
 
                     <div className="mb-8 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-                        <h2 className="mb-4 text-2xl font-bold text-rose-900">2. Service Proposé</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-stone-900">2. Service Proposé</h2>
                         <p>
                             Expert Béton Décoratif est une plateforme nationale de mise en relation entre les particuliers ou les entreprises et des installateurs certifiés RGE QualiPAC (pompes à chaleur).
                         </p>
                     </div>
 
                     <div className="mb-8 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-                        <h2 className="mb-4 text-2xl font-bold text-rose-900">3. Hébergement</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-stone-900">3. Hébergement</h2>
                         <p>
                             Le Site est hébergé par la société <strong>Vercel Inc.</strong>
                         </p>
@@ -66,14 +66,14 @@ export default function MentionsLegales() {
                     </div>
 
                     <div className="mb-8 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-                        <h2 className="mb-4 text-2xl font-bold text-rose-900">4. Propriété Intellectuelle</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-stone-900">4. Propriété Intellectuelle</h2>
                         <p>
                             L&apos;ensemble des contenus (textes, images, base de données, marque &quot;Expert Béton Décoratif&quot;) est protégé par le droit de la propriété intellectuelle. Toute reproduction non autorisée est interdite.
                         </p>
                     </div>
 
                     <div className="mb-8 rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
-                        <h2 className="mb-4 text-2xl font-bold text-rose-900">5. Données Personnelles (RGPD)</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-stone-900">5. Données Personnelles (RGPD)</h2>
                         <p>
                             Les données collectées (nom, téléphone, adresse d'installation, facture d'électricité moyenne, système de chauffage actuel) sont utilisées uniquement pour l'établissement d'études de rentabilité, de devis et la mise en relation avec nos partenaires installateurs certifiés QualiPAC.
                         </p>
