@@ -16,7 +16,7 @@ export default function MobileStickyCTA({
         emerald: "from-emerald-600 to-emerald-700 shadow-emerald-500/30",
         amber: "from-purple-600 to-purple-700 shadow-purple-500/30",
         purple: "from-purple-600 to-purple-700 shadow-purple-500/30",
-        rose: "from-stone-600 to-stone-700 shadow-stone-500/30",
+        rose: "from-rose-600 to-rose-700 shadow-rose-500/30",
     };
 
     const gradientClass = gradients[themeColor] || gradients.rose;
@@ -37,7 +37,7 @@ export default function MobileStickyCTA({
                 className={`flex w-full items-center justify-center gap-2 bg-gradient-to-r ${gradientClass} text-white rounded-xl py-4 font-extrabold shadow-xl transition active:scale-95`}
             >
                 <Zap size={20} fill="currentColor" />
-                <span>Devis Gratuit en 24h</span>
+                <span>Presupuesto Gratuito</span>
             </a>
         </div>
     );
