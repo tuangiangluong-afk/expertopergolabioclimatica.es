@@ -2,26 +2,26 @@ import { CityConfig } from "@/lib/db";
 
 export const NATIONAL_CONFIG: CityConfig = {
     slug: "home",
-    domain: "expertbetondecoratif.com",
-    name: "Expert Béton Décoratif",
-    city: "France",
-    phoneNumber: "01 84 80 00 00",
-    email: "contact@expertbetondecoratif.com",
+    domain: "expertopergolabioclimatica.es",
+    name: "Experto Pérgola Bioclimática",
+    city: "España",
+    phoneNumber: "+34 900 000 000",
+    email: "contacto@expertopergolabioclimatica.es",
     heroImage: "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2940&auto=format&fit=crop",
-    description: "Le réseau n°1 d'installateurs de pompes à chaleur en France. Devis gratuit, étude de rentabilité et artisans certifiés RGE.",
+    description: "La red n°1 de instaladores de pérgolas bioclimáticas en España. Presupuesto gratuito y técnicos cualificados.",
     meta: {
-        title: "Expert Béton Décoratif | Chauffage Écologique & Économies d'Énergie",
-        description: "Installation de pompes à chaleur pour particuliers partout en France. Devis gratuit sous 24h. Simulateur d'éligibilité aux aides RGE QualiPAC."
+        title: "Experto Pérgola Bioclimática | Diseño y Instalación Premium",
+        description: "Instalación de pérgolas bioclimáticas a medida en toda España. Presupuesto gratuito en 24h. Materiales premium y garantía."
     },
     features: [
-        "Rendement Garanti",
-        "Devis Gratuit sous 24h",
-        "Éligible MaPrimeRénov'",
-        "Artisans RGE QualiPAC"
+        "Diseño a Medida",
+        "Presupuesto Gratuito en 24h",
+        "Materiales Premium",
+        "Instaladores Certificados"
     ],
     pricing: {
-        base: "Sur Devis",
-        description: "Devis gratuit personnalisé selon votre chauffage actuel"
+        base: "Presupuesto Gratuito",
+        description: "Presupuesto personalizado según su proyecto de pérgola"
     },
     hospitals: [],
     stations: [],
