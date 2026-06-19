@@ -12,90 +12,72 @@ export interface PseoPageContent {
     expert_tip: string;
 }
 
-const REGIONAL_DATA: Record<string, { subsidyName: string; subsidyAmount: string; avgPrice: string; }> = {};
-
 const DEFAULT_REGIONAL = {
-    subsidyName: "Diseño a medida",
-    subsidyAmount: "Proyecto llave en mano",
-    avgPrice: "10.000€ – 25.000€"
+    subsidyName: "Garantía de Fábrica 10 Años",
+    subsidyAmount: "Promoción de Temporada aplicable",
+    avgPrice: "3.500€ – 8.000€"
 };
 
-type SpintaxType = "meta_title" | "meta_description" | "hero_title" | "hero_subtitle" | "cta_primary";
-type SpintaxContext = "HUB" | "LOCAL";
+function getExpertTip(city: string, postalCode: string): string {
+    const hash = city.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+    const tips = [
+        `Para su pérgola bioclimática en ${city}, recomendamos integrar iluminación LED regulable en las lamas para disfrutar de su terraza también durante las noches de verano.`,
+        `En ${city}, añadir cortinas de cristal o toldos zip laterales a su pérgola le permitirá crear un cerramiento completo para aprovechar el espacio exterior durante los días de lluvia o viento.`,
+        `Todas nuestras pérgolas instaladas en ${city} cuentan con sensores de lluvia y viento automatizados para cerrar las lamas automáticamente en caso de mal tiempo.`
+    ];
+    return tips[hash % tips.length];
+}
 
-const templates: Record<SpintaxType, Record<SpintaxContext, string[]>> = {
-    meta_title: {
-        HUB: [
-            "Las Mejores Pérgolas Bioclimáticas en {city} | Fabricantes",
-            "Pérgolas de Aluminio a Medida {city} | Compara Presupuestos",
-            "Expertos en Pérgolas Bioclimáticas y Cerramientos en {city}"
-        ],
-        LOCAL: [
-            "Pérgolas Bioclimáticas a Medida en {city} | Instaladores Premium",
-            "Tu Pérgola de Aluminio en {city} | Diseño y Elegancia",
-            "Instalación de Pérgolas Bioclimáticas de Lujo en {city}"
-        ]
-    },
-    meta_description: {
-        HUB: [
-            "Encuentra los mejores fabricantes e instaladores de pérgolas bioclimáticas en {city}. Compara precios para transformar tu terraza o jardín.",
-            "Directorio de especialistas en cerramientos y pérgolas de aluminio en {city}. Solicita hasta 3 diseños y presupuestos sin compromiso."
-        ],
-        LOCAL: [
-            "Transforma el exterior de tu chalet en {city}. Instalación de pérgolas bioclimáticas de aluminio con lamas orientables y motorizadas. Calidad premium.",
-            "Disfruta de tu terraza todo el año en {city}. Pérgolas a medida, cerramientos de cristal e iluminación LED integrada. Presupuesto sin compromiso."
-        ]
-    },
-    hero_title: {
-        HUB: [
-            "Los Mejores Fabricantes de <span class=\"text-stone-600\">Pérgolas Bioclimáticas</span> en {city}",
-            "Pérgolas a Medida en <span class=\"text-stone-600\">{city}</span>: Compara Opciones",
-            "Diseña tu Terraza Perfecta en <span class=\"text-stone-600\">{city}</span>"
-        ],
-        LOCAL: [
-            "Instalación de <span class=\"text-stone-600\">Pérgolas Bioclimáticas</span> en {city}",
-            "Lujo y Confort para tu Terraza en <span class=\"text-stone-600\">{city}</span>",
-            "Expertos en <span class=\"text-stone-600\">Estructuras de Aluminio</span> en {city}"
-        ]
-    },
-    hero_subtitle: {
-        HUB: [
-            "Conecta con los líderes en cerramientos de exterior. Recibe diseños y presupuestos personalizados para revalorizar tu propiedad.",
-            "Protección solar, domótica y diseño vanguardista. Compara precios de empresas especialistas en pérgolas de aluminio."
-        ],
-        LOCAL: [
-            "Lamas orientables motorizadas, iluminación LED y cerramientos de cristal. Crea un nuevo espacio en tu hogar con nuestros acabados de lujo.",
-            "Fabricación a medida e instalación impecable en {city}. Convierte tu jardín en un oasis disfrutable los 365 días del año."
-        ]
-    },
-    cta_primary: {
-        HUB: ["Solicitar 3 Presupuestos"],
-        LOCAL: ["Pedir Presupuesto a Medida"]
-    }
-};
-
-export async function getPseoContent(cityConfig: CityConfig, isHub: boolean = false): Promise<PseoPageContent> {
-    const context: SpintaxContext = isHub ? "HUB" : "LOCAL";
-    const cityHash = cityConfig.city.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const pick = (arr: string[]) => arr[cityHash % arr.length];
+function getIntroHtml(city: string, postalCode: string, avgPrice: string): string {
+    const hash = city.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
     
-    const replaceVars = (text: string) => {
-        return text
-            .replace(/{city}/g, cityConfig.city)
-            .replace(/{dept}/g, cityConfig.department || "");
+    // Evaluate closures replacing ${city} etc.
+    const intros = [
+        `<p class="mb-4">¿Busca transformar su terraza o jardín en <strong>${city}</strong> con una <strong>pérgola bioclimática</strong> de diseño? Nuestros instaladores especializados montan estructuras de aluminio con lamas orientables a medida.</p><p>Una pérgola bioclimática motorizada en ${city} tiene un precio estimado de <strong>${avgPrice}</strong> dependiendo de las dimensiones y extras. Regule la temperatura y la entrada de luz solar de forma natural.</p>`,
+        `<p class="mb-4">Cree un nuevo espacio de vida en el exterior de su vivienda en <strong>${city}</strong>. Nuestras pérgolas bioclimáticas le protegen del sol, la lluvia y el viento, revalorizando su propiedad.</p><p>Presupuesto estimado: <strong>${avgPrice}</strong> instalación incluida. Ofrecemos acabados premium en diferentes colores de aluminio y opciones de domótica avanzada.</p>`
+    ];
+
+    return intros[hash % intros.length];
+}
+
+export async function getPseoContent(cityConfig: CityConfig, targetType: string = 'MIXED'): Promise<PseoPageContent> {
+    const { city, postalCode, pricing } = cityConfig;
+    const postal = postalCode || "";
+    
+    const regionalInfo = DEFAULT_REGIONAL;
+    const realPrice = pricing?.base || regionalInfo.avgPrice;
+
+    // Use a small local function to render the strings that require dynamic interpolation 
+    // at runtime (since the strings above use ${city} which we need to evaluate at runtime)
+    
+    const renderTip = (c: string) => {
+      const hash = c.split('').reduce((a, x) => a + x.charCodeAt(0), 0);
+      const tips = [
+        `Para su pérgola bioclimática en ${c}, recomendamos integrar iluminación LED regulable en las lamas para disfrutar de su terraza también durante las noches de verano.`,
+        `En ${c}, añadir cortinas de cristal o toldos zip laterales a su pérgola le permitirá crear un cerramiento completo para aprovechar el espacio exterior durante los días de lluvia o viento.`,
+        `Todas nuestras pérgolas instaladas en ${c} cuentan con sensores de lluvia y viento automatizados para cerrar las lamas automáticamente en caso de mal tiempo.`
+      ];
+      return tips[hash % tips.length];
     };
 
-    const regional = DEFAULT_REGIONAL;
+    const renderIntro = (c: string, p: string, avg: string) => {
+      const hash = c.split('').reduce((a, x) => a + x.charCodeAt(0), 0);
+      const intros = [
+        `<p class="mb-4">¿Busca transformar su terraza o jardín en <strong>${c}</strong> con una <strong>pérgola bioclimática</strong> de diseño? Nuestros instaladores especializados montan estructuras de aluminio con lamas orientables a medida.</p><p>Una pérgola bioclimática motorizada en ${c} tiene un precio estimado de <strong>${avg}</strong> dependiendo de las dimensiones y extras. Regule la temperatura y la entrada de luz solar de forma natural.</p>`,
+        `<p class="mb-4">Cree un nuevo espacio de vida en el exterior de su vivienda en <strong>${c}</strong>. Nuestras pérgolas bioclimáticas le protegen del sol, la lluvia y el viento, revalorizando su propiedad.</p><p>Presupuesto estimado: <strong>${avg}</strong> instalación incluida. Ofrecemos acabados premium en diferentes colores de aluminio y opciones de domótica avanzada.</p>`
+      ];
+      return intros[hash % intros.length];
+    };
 
     return {
-        meta_title: replaceVars(pick(templates.meta_title[context])),
-        meta_description: replaceVars(pick(templates.meta_description[context])),
-        hero_title: replaceVars(pick(templates.hero_title[context])),
-        hero_badge: isHub ? "Diseño a medida" : `Instalador Premium en ${cityConfig.city}`,
-        intro_html: replaceVars(pick(templates.hero_subtitle[context])),
-        cta_primary: pick(templates.cta_primary[context]),
-        pricing_estimated: regional.avgPrice,
-        regional_subsidy: "",
-        expert_tip: `Revaloriza tu chalet en ${cityConfig.city} con acabados de lujo y domótica integrada.`
+        meta_title: `Instalador Pérgolas Bioclimáticas en ${city}${postal ? ` (${postal})` : ""} | A Medida`,
+        meta_description: `Diseño e instalación de pérgolas bioclimáticas de aluminio a medida en ${city}. Disfrute de su terraza todo el año. Pida su presupuesto gratuito en 24h.`,
+        hero_title: `Instalador de <span class="text-slate-500">Pérgolas Bioclimáticas</span> en ${city}${postal ? ` <span class="text-slate-400 text-3xl">(${postal})</span>` : ""}`,
+        hero_badge: regionalInfo.subsidyName,
+        intro_html: renderIntro(city, postal, realPrice),
+        cta_primary: "Solicitar diseño y presupuesto 3D",
+        pricing_estimated: realPrice,
+        regional_subsidy: regionalInfo.subsidyAmount,
+        expert_tip: renderTip(city),
     };
 }
