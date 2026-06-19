@@ -38,7 +38,7 @@ export function getTargetAsCityConfig(slug: string): CityConfig | undefined {
     if (!target) return undefined;
 
     const priceDisplay = target.price_start + " €";
-    const priceDesc = "Proyecto a Medida";
+    const priceDesc = "Diseño y Presupuesto gratis";
 
     return {
         slug: target.slug,
@@ -52,11 +52,11 @@ export function getTargetAsCityConfig(slug: string): CityConfig | undefined {
         description: `${target.heroTitle} a medida en ${target.name} (${target.zip}).`,
         geo: target.geo,
         features: [
+            "Diseño 3D Gratis",
             "Aluminio Premium",
-            "Lamas Orientables",
-            "Domótica Integrada",
-            "Iluminación LED",
-            "Diseño Personalizado"
+            "Instaladores Certificados",
+            "Garantía 10 Años",
+            "Presupuesto en 24h"
         ],
         stations: [],
         hospitals: [],
