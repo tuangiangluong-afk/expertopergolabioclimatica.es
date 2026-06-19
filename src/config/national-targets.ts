@@ -45,7 +45,7 @@ export function getTargetAsCityConfig(slug: string): CityConfig | undefined {
         city: target.name,
         name: `${target.heroTitle} ${target.name}`,
         domain: `${target.slug}.expertopergolabioclimatica.es`, // rewrite target
-        heroImage: target.heroImage || "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2672&auto=format&fit=crop",
+        heroImage: target.heroImage || "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2672&auto=format&fit=crop",
         postalCode: target.zip,
         department: "ES",
         region: "España",
