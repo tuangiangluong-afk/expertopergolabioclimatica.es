@@ -74,10 +74,10 @@ export async function getPseoContent(cityConfig: CityConfig, targetType: string 
         meta_description: `Diseño e instalación de pérgolas bioclimáticas de aluminio a medida en ${city}. Disfrute de su terraza todo el año. Pida su presupuesto gratuito en 24h.`,
         hero_title: `Instalador de <span class="text-slate-500">Pérgolas Bioclimáticas</span> en ${city}${postal ? ` <span class="text-slate-400 text-3xl">(${postal})</span>` : ""}`,
         hero_badge: regionalInfo.subsidyName,
-        intro_html: renderIntro(city, postal, realPrice),
+        intro_html: cityConfig.unique_intro || renderIntro(city, postal, realPrice),
         cta_primary: "Solicitar diseño y presupuesto 3D",
         pricing_estimated: realPrice,
         regional_subsidy: regionalInfo.subsidyAmount,
-        expert_tip: renderTip(city),
+        expert_tip: cityConfig.unique_expert_tip || renderTip(city),
     };
 }
